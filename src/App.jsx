@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { X, Music, Mail, Camera, Play, Pause, Heart, Gift, Lock } from 'lucide-react';
+import { X, Music, Mail, Camera, Play, Pause, Heart, Gift, Lock, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Placeholder GIFs
 const GIFS = {
@@ -361,17 +361,29 @@ function App() {
                 <div className="space-y-6">
                   {/* Pros */}
                   <div className="bg-pink-50 p-4 rounded-2xl border border-pink-100">
-                    <div className="flex items-center gap-2 mb-2 text-pink-600 font-semibold">
-                      <Heart size={16} fill="currentColor" />
-                      <span>Reason #{proIndex + 1}</span>
+                    <div className="flex items-center gap-2 mb-2 text-pink-600 font-semibold justify-between">
+                      <div className="flex items-center gap-2">
+                        <Heart size={16} fill="currentColor" />
+                        <span>Reason #{proIndex + 1}</span>
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => setProIndex(prev => Math.max(0, prev - 1))}
+                          disabled={proIndex === 0}
+                          className={`p-1 rounded-full transition-colors ${proIndex === 0 ? 'text-pink-200 cursor-not-allowed' : 'bg-pink-200 text-pink-700 hover:bg-pink-300'}`}
+                        >
+                          <ChevronLeft size={16} />
+                        </button>
+                        <button
+                          onClick={() => setProIndex(prev => Math.min(PROS_TEXTS.length - 1, prev + 1))}
+                          disabled={proIndex === PROS_TEXTS.length - 1}
+                          className={`p-1 rounded-full transition-colors ${proIndex === PROS_TEXTS.length - 1 ? 'text-pink-200 cursor-not-allowed' : 'bg-pink-200 text-pink-700 hover:bg-pink-300'}`}
+                        >
+                          <ChevronRight size={16} />
+                        </button>
+                      </div>
                     </div>
                     <p className="text-gray-700 min-h-[3rem] mb-3">"{PROS_TEXTS[proIndex]}"</p>
-                    <button
-                      onClick={handleProClick}
-                      className="text-xs bg-pink-200 text-pink-700 px-3 py-1 rounded-full hover:bg-pink-300 font-medium transition-colors"
-                    >
-                      Next Reason
-                    </button>
                   </div>
 
                   {/* Cons */}
