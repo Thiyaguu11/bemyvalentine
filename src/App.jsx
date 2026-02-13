@@ -408,13 +408,12 @@ function App() {
               className="flex flex-col items-center text-center p-6"
             >
               <h1 className="text-5xl font-bold text-red-600 mb-6 font-serif">I LOVE YOU!</h1>
-              <div className="w-80 h-80 overflow-hidden shadow-2xl border-4 border-red-200 mb-6 bg-white heart-mask relative">
+              <div className="w-80 h-80 rounded-full overflow-hidden shadow-2xl border-4 border-red-200 mb-6 bg-white relative">
                 <motion.img
                   whileHover={{ scale: 1.1 }}
                   src={GIFS.love}
                   alt="Love"
                   className="w-full h-full object-cover"
-                  style={{ objectPosition: 'center 20%' }}
                 />
               </div>
               <p className="text-gray-600 italic">Happy Valentine's Day! 💖</p>
