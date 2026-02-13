@@ -338,13 +338,15 @@ function App() {
 
                   <h3 className="text-2xl font-serif text-gray-800 mb-4 font-bold border-b pb-2">My Dearest,</h3>
                   <p className="text-gray-600 leading-relaxed font-serif text-sm">
-                    Words cannot express how much you mean to me. You are the sunshine in my days and the starlight in my nights. Every moment with you is a gift I cherish.
+                    On this Valentine’s Day, I just want to say thank you for loving me the way you do. You understand me, support me, and believe in me even when I doubt myself.
                     <br /><br />
-                    I love you more than pizza (and that says a lot!).
+                    You are my peace, my happiness, and my safe place.
+                    <br /><br />
+                    No matter what life brings, I want to walk every step with you.
                     <br /><br />
                     Forever yours,
                     <br />
-                    <span className="font-bold">Me ❤️</span>
+                    <span className="font-bold font-serif text-pink-600 text-lg">Kiruba ❤️</span>
                   </p>
                   <button
                     onClick={() => setIsGift2Open(false)}
