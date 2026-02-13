@@ -83,7 +83,17 @@ function App() {
     setScreen('SUCCESS');
     const duration = 3 * 1000;
     const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    // Create heart shape
+    const heart = confetti.shapeFromText({ text: '❤️', scalar: 3 });
+
+    const defaults = {
+      startVelocity: 30,
+      spread: 360,
+      ticks: 60,
+      zIndex: 0,
+      shapes: [heart]
+    };
 
     function randomInRange(min, max) {
       return Math.random() * (max - min) + min;
@@ -96,10 +106,9 @@ function App() {
         return clearInterval(interval);
       }
 
-      const particleCount = 50 * (timeLeft / duration);
-      // since particles fall down, start a bit higher than random
-      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#ff69b4', '#ff1493'] });
-      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#ff69b4', '#ff1493'] });
+      const particleCount = 40 * (timeLeft / duration);
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
     }, 250);
   };
 
