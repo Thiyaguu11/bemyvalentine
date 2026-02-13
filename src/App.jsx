@@ -362,13 +362,12 @@ function App() {
         return (
           <Container>
             <h2 className="text-4xl font-bold text-purple-600 mb-12 font-serif">Us Through Time</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 w-full max-w-6xl px-4 items-start">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-6xl px-4 items-start">
               {[
                 { src: "/images/gift1.jpg", caption: "Sweet Moments" },
                 { src: "/images/gift2.jpg", caption: "Forever Together" },
                 { src: "/images/gift3.jpg", caption: "Everyday Joy" },
-                { src: "/images/gift4.jpg", caption: "Our Journey" },
-                { src: "/images/gift5.jpg", caption: "Infinite Love" }
+                { src: "/images/gift4.jpg", caption: "Our Journey" }
               ].map((photo, i) => (
                 <motion.div
                   key={i}
