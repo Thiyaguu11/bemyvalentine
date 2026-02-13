@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { X, Music, Mail, Camera, Play, Pause, Heart, Gift } from 'lucide-react';
+import { X, Music, Mail, Camera, Play, Pause, Heart, Gift, Lock } from 'lucide-react';
 
 // Placeholder GIFs
 const GIFS = {
@@ -23,6 +23,7 @@ function App() {
   const [proIndex, setProIndex] = useState(0);
   const [isGift2Open, setIsGift2Open] = useState(false);
   const [isHoveringNo, setIsHoveringNo] = useState(false);
+  const [viewedGifts, setViewedGifts] = useState({ ears: false, heart: false });
 
   // Modal handlers
   const handleNoClick = () => setShowNoModal(true);
@@ -149,21 +150,35 @@ function App() {
             <h2 className="text-4xl md:text-5xl font-bold text-pink-600 mb-12 text-center">Choose a Gift 🎁</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl px-4">
               {[
-                { id: 'GIFT_1', label: 'For Your Ears', icon: <Music size={40} />, color: 'bg-blue-100 hover:bg-blue-200 text-blue-600' },
-                { id: 'GIFT_2', label: 'For Your Heart', icon: <Mail size={40} />, color: 'bg-yellow-100 hover:bg-yellow-200 text-yellow-600' },
-                { id: 'GIFT_3', label: 'For Your Eyes', icon: <Camera size={40} />, color: 'bg-purple-100 hover:bg-purple-200 text-purple-600' }
+                { id: 'GIFT_1', label: 'For Your Ears', icon: <Music size={40} />, color: 'bg-blue-100 hover:bg-blue-200 text-blue-600', unlocked: true },
+                { id: 'GIFT_2', label: 'For Your Heart', icon: <Mail size={40} />, color: viewedGifts.ears ? 'bg-yellow-100 hover:bg-yellow-200 text-yellow-600' : 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60', unlocked: viewedGifts.ears },
+                { id: 'GIFT_3', label: 'For Your Eyes', icon: <Camera size={40} />, color: viewedGifts.heart ? 'bg-purple-100 hover:bg-purple-200 text-purple-600' : 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60', unlocked: viewedGifts.heart }
               ].map((gift) => (
                 <motion.button
                   key={gift.id}
-                  whileHover={{ scale: 1.05, y: -10 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setScreen(gift.id)}
-                  className={`flex flex-col items-center justify-center p-12 rounded-3xl shadow-md border border-white/50 transition-all ${gift.color}`}
+                  whileHover={gift.unlocked ? { scale: 1.05, y: -10 } : {}}
+                  whileTap={gift.unlocked ? { scale: 0.95 } : {}}
+                  onClick={() => {
+                    if (gift.unlocked) {
+                      if (gift.id === 'GIFT_1') setViewedGifts(prev => ({ ...prev, ears: true }));
+                      if (gift.id === 'GIFT_2') setViewedGifts(prev => ({ ...prev, heart: true }));
+                      setScreen(gift.id);
+                    }
+                  }}
+                  className={`flex flex-col items-center justify-center p-12 rounded-3xl shadow-md border border-white/50 transition-all ${gift.color} relative overflow-hidden`}
                 >
-                  <div className="p-6 bg-white rounded-full shadow-md mb-6">
+                  {!gift.unlocked && (
+                    <div className="absolute top-4 right-4 text-gray-400">
+                      <Lock size={20} />
+                    </div>
+                  )}
+                  <div className={`p-6 bg-white rounded-full shadow-md mb-6 ${!gift.unlocked && 'grayscale opacity-50'}`}>
                     {gift.icon}
                   </div>
                   <span className="text-2xl font-bold">{gift.label}</span>
+                  {!gift.unlocked && (
+                    <span className="text-xs mt-2 uppercase tracking-widest font-bold opacity-60">Locked</span>
+                  )}
                 </motion.button>
               ))}
             </div>
