@@ -10,6 +10,12 @@ const GIFS = {
   love: '/images/valentine.jpg',
 };
 
+const AUDIO_ASSETS = {
+  'Enthaaraa Enthaaraa': '/music/Enthaaraa.mp3',
+  'kanaa kaangiren': '/music/Kanaa.mp3',
+  'Oru Parvaiyil': '/music/OruParvaiyil.mp3'
+};
+
 const PROS_TEXTS = [
   "I make great pasta and I'm always on time.",
   "I will always support your dreams no matter what.",
@@ -63,6 +69,8 @@ function App() {
   const [isGift2Open, setIsGift2Open] = useState(false);
   const [isHoveringNo, setIsHoveringNo] = useState(false);
   const [viewedGifts, setViewedGifts] = useState({ ears: false, heart: false });
+  const [playingSong, setPlayingSong] = useState(null);
+  const [audio, setAudio] = useState(null);
 
   // Modal handlers
   const handleNoClick = () => setShowNoModal(true);
@@ -120,6 +128,21 @@ function App() {
       origin: { y: 0.6 },
       colors: ['#ff69b4', '#ff1493', '#ffc0cb', '#ffffff']
     });
+  };
+
+  const toggleSong = (songName) => {
+    if (playingSong === songName) {
+      audio.pause();
+      setPlayingSong(null);
+      setAudio(null);
+    } else {
+      if (audio) audio.pause();
+      const newAudio = new Audio(AUDIO_ASSETS[songName.split(' - ')[0]]);
+      newAudio.play();
+      setPlayingSong(songName);
+      setAudio(newAudio);
+      newAudio.onended = () => setPlayingSong(null);
+    }
   };
 
   // Reusable Container
@@ -276,17 +299,27 @@ function App() {
                 <p className="text-blue-100 text-sm">Songs that remind me of you</p>
               </div>
               <div className="p-6 flex flex-col gap-4">
-                {['Perfect - Ed Sheeran', 'Lover - Taylor Swift', 'Just the Way You Are - Bruno Mars'].map((song, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
+                {[
+                  'Enthaaraa Enthaaraa - Thirumanam Enum Nikkah',
+                  'kanaa kaangiren - Aanandha Thandavam',
+                  'Oru Parvaiyil - Siva Manasula Sakthi'
+                ].map((song, i) => (
+                  <div
+                    key={i}
+                    onClick={() => toggleSong(song)}
+                    className={`flex items-center justify-between p-3 rounded-xl transition-all cursor-pointer group shadow-sm border ${playingSong === song ? 'bg-blue-100 border-blue-200' : 'bg-gray-50 border-gray-100 hover:bg-gray-100'}`}
+                  >
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center font-bold text-xs">{i + 1}</div>
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${playingSong === song ? 'bg-blue-500 text-white' : 'bg-blue-100 text-blue-500'}`}>
+                        {playingSong === song ? <Pause size={14} fill="currentColor" /> : i + 1}
+                      </div>
                       <div className="flex flex-col">
-                        <span className="font-medium text-gray-800 text-sm">{song.split(' - ')[0]}</span>
+                        <span className={`font-medium text-sm ${playingSong === song ? 'text-blue-700' : 'text-gray-800'}`}>{song.split(' - ')[0]}</span>
                         <span className="text-xs text-gray-400">{song.split(' - ')[1]}</span>
                       </div>
                     </div>
-                    <button className="text-gray-400 hover:text-blue-500 group-hover:scale-110 transition-all">
-                      <Play size={20} fill="currentColor" />
+                    <button className={`${playingSong === song ? 'text-blue-500' : 'text-gray-400'} hover:text-blue-500 group-hover:scale-110 transition-all`}>
+                      {playingSong === song ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />}
                     </button>
                   </div>
                 ))}
