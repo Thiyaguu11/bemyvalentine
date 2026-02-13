@@ -19,9 +19,9 @@ const PROS_TEXTS = [
 ];
 
 const BackgroundHearts = () => {
-  const hearts = Array.from({ length: 20 });
+  const hearts = Array.from({ length: 25 });
   return (
-    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-50">
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-70">
       {hearts.map((_, i) => (
         <motion.div
           key={i}
@@ -32,24 +32,24 @@ const BackgroundHearts = () => {
             y: Math.random() * 120 + "%"
           }}
           animate={{
-            opacity: [0, 0.4, 0],
-            x: ["0%", "-20%"],
-            y: ["0%", "-20%"],
+            opacity: [0, 0.6, 0],
+            x: ["0%", "-30%"],
+            y: ["0%", "-30%"],
           }}
           transition={{
-            duration: Math.random() * 15 + 15,
+            duration: Math.random() * 15 + 10,
             repeat: Infinity,
             ease: "linear",
             delay: Math.random() * 20
           }}
-          className="absolute text-pink-200"
+          className="absolute text-pink-400"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
-            filter: "blur(0.5px)"
+            filter: "blur(0.3px)"
           }}
         >
-          <Heart size={Math.random() * 30 + 10} fill="currentColor" />
+          <Heart size={Math.random() * 35 + 15} fill="currentColor" />
         </motion.div>
       ))}
     </div>
