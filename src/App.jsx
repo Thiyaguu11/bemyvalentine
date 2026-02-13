@@ -7,7 +7,7 @@ import confetti from 'canvas-confetti';
 const GIFS = {
   sideEye: 'https://media1.tenor.com/m/f2dJe4s7e9sAAAAC/side-eye-pride.gif',
   kiss: 'https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif',
-  love: 'https://media.tenor.com/nKC-nJLiQpQAAAAi/milk-and-mocha-bear.gif',
+  love: '/images/valentine.jpg',
 };
 
 const PROS_TEXTS = [
@@ -362,18 +362,30 @@ function App() {
         return (
           <Container>
             <h2 className="text-4xl font-bold text-purple-600 mb-12 font-serif">Us Through Time</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full max-w-6xl px-4">
-              {[1, 2, 3, 4].map((i) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 w-full max-w-6xl px-4">
+              {[
+                { src: "/images/gift1.jpg", caption: "Sweet Moments" },
+                { src: "/images/gift2.jpg", caption: "Forever Together" },
+                { src: "/images/gift3.jpg", caption: "Everyday Joy" },
+                { src: "/images/gift4.jpg", caption: "Our Journey" },
+                { src: "/images/gift5.jpg", caption: "Infinite Love" }
+              ].map((photo, i) => (
                 <motion.div
                   key={i}
                   whileHover={{ scale: 1.05, rotate: Math.random() * 6 - 3, zIndex: 10 }}
                   className="bg-white p-4 pb-12 shadow-xl rounded-sm transform transition-all cursor-pointer"
                   style={{ rotate: `${Math.random() * 6 - 3}deg` }}
                 >
-                  <div className="w-full aspect-[4/3] bg-gray-200 flex items-center justify-center overflow-hidden mb-4">
-                    <span className="text-gray-400 text-lg">Photo {i}</span>
+                  <div className="w-full aspect-[4/3] bg-gray-200 flex items-center justify-center overflow-hidden mb-4 rounded-sm shadow-inner group">
+                    <img
+                      src={photo.src}
+                      alt={photo.caption}
+                      className="w-full h-full object-cover grayscale-[0.2] transition-all group-hover:grayscale-0"
+                    />
                   </div>
-                  <div className="h-6 w-3/4 bg-gray-100 rounded"></div>
+                  <div className="text-center">
+                    <span className="font-serif text-gray-500 italic text-sm">{photo.caption}</span>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -396,7 +408,7 @@ function App() {
               className="flex flex-col items-center text-center p-6"
             >
               <h1 className="text-5xl font-bold text-red-600 mb-6 font-serif">I LOVE YOU!</h1>
-              <div className="w-64 h-64 rounded-full overflow-hidden shadow-2xl border-4 border-red-200 mb-6">
+              <div className="w-64 h-64 rounded-full overflow-hidden shadow-2xl border-4 border-red-200 mb-6 bg-white">
                 <img src={GIFS.love} alt="Love" className="w-full h-full object-cover" />
               </div>
               <p className="text-gray-600 italic">Happy Valentine's Day! 💖</p>
