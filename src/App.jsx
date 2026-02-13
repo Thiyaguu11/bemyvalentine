@@ -487,7 +487,14 @@ function App() {
 
                   {/* Cons */}
                   <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100 flex items-center gap-4">
-                    <img src={GIFS.sideEye} alt="Side Eye" className="w-16 h-16 rounded-full object-cover border-2 border-gray-200" />
+                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200">
+                      <img
+                        src={GIFS.sideEye}
+                        alt="Side Eye"
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: 'center top', scale: 1.25 }}
+                      />
+                    </div>
                     <div>
                       <h3 className="font-semibold text-gray-800">Cons:</h3>
                       <p className="text-gray-500 text-sm">Literally none. Zero.</p>
