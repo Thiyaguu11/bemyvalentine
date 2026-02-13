@@ -1,21 +1,24 @@
 @import "tailwindcss";
 
 @layer utilities {
-  .live-gradient {
-    background: linear-gradient(-45deg, #FFFFFF, #FFF0F5, #FFD1DC, #FF91AF);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-  }
+    .live-gradient {
+        /* Adding the first color at the end for an even smoother loop transition */
+        background: linear-gradient(-45deg, #FFFFFF, #FFF0F5, #FFD1DC, #FF91AF, #FFFFFF);
+        background-size: 400% 400%;
+        animation: gradient 12s ease infinite;
+    }
 
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
     }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
 }
