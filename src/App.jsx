@@ -53,7 +53,7 @@ function App() {
 
   // Reusable Container
   const Container = ({ children, className = "" }) => (
-    <div className={`w-full h-full flex flex-col items-center justify-center p-6 relative overflow-hidden bg-gradient-to-br from-pink-100 to-red-50 ${className}`}>
+    <div className={`w-full h-full flex flex-col items-center justify-center p-6 relative overflow-hidden transition-all live-gradient ${className}`}>
       {/* Floating Hearts generic animation bg could go here */}
       {children}
     </div>
@@ -133,7 +133,7 @@ function App() {
 
       case 'YES_PAGE':
         return (
-          <Container className="bg-gradient-to-t from-pink-200 to-white">
+          <Container>
             <motion.div
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -198,7 +198,7 @@ function App() {
 
       case 'GIFT_1': // Songs
         return (
-          <Container className="bg-blue-50">
+          <Container>
             <div className="w-full max-w-sm bg-white rounded-3xl shadow-xl overflow-hidden">
               <div className="bg-blue-500 p-6 text-white text-center relative">
                 <Music size={48} className="mx-auto mb-2 opacity-80" />
@@ -235,7 +235,7 @@ function App() {
 
       case 'GIFT_2': // Letter
         return (
-          <Container className="bg-yellow-50">
+          <Container>
             <AnimatePresence mode="wait">
               {!isGift2Open ? (
                 <motion.div
@@ -290,7 +290,7 @@ function App() {
 
       case 'GIFT_3': // Photos
         return (
-          <Container className="bg-purple-50">
+          <Container>
             <h2 className="text-4xl font-bold text-purple-600 mb-12 font-serif">Us Through Time</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full max-w-6xl px-4">
               {[1, 2, 3, 4].map((i) => (
@@ -318,7 +318,7 @@ function App() {
 
       case 'SUCCESS':
         return (
-          <Container className="bg-red-50">
+          <Container>
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -340,8 +340,8 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen bg-pink-50 flex items-center justify-center overflow-hidden">
-      <div className="w-full h-full bg-white relative overflow-hidden text-black transition-all">
+    <div className="w-screen h-screen flex items-center justify-center overflow-hidden">
+      <div className="w-full h-full relative overflow-hidden text-black transition-all">
         {/* Render the full-screen content */}
         {renderContent()}
 
