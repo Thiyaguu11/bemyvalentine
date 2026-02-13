@@ -146,24 +146,24 @@ function App() {
       case 'GIFT_MENU':
         return (
           <Container>
-            <h2 className="text-3xl font-bold text-pink-600 mb-8 text-center">Choose a Gift 🎁</h2>
-            <div className="grid grid-cols-1 gap-6 w-full max-w-sm">
+            <h2 className="text-4xl md:text-5xl font-bold text-pink-600 mb-12 text-center">Choose a Gift 🎁</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl px-4">
               {[
-                { id: 'GIFT_1', label: 'For Your Ears', icon: <Music size={32} />, color: 'bg-blue-100 hover:bg-blue-200 text-blue-600' },
-                { id: 'GIFT_2', label: 'For Your Heart', icon: <Mail size={32} />, color: 'bg-yellow-100 hover:bg-yellow-200 text-yellow-600' },
-                { id: 'GIFT_3', label: 'For Your Eyes', icon: <Camera size={32} />, color: 'bg-purple-100 hover:bg-purple-200 text-purple-600' }
+                { id: 'GIFT_1', label: 'For Your Ears', icon: <Music size={40} />, color: 'bg-blue-100 hover:bg-blue-200 text-blue-600' },
+                { id: 'GIFT_2', label: 'For Your Heart', icon: <Mail size={40} />, color: 'bg-yellow-100 hover:bg-yellow-200 text-yellow-600' },
+                { id: 'GIFT_3', label: 'For Your Eyes', icon: <Camera size={40} />, color: 'bg-purple-100 hover:bg-purple-200 text-purple-600' }
               ].map((gift) => (
                 <motion.button
                   key={gift.id}
-                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileHover={{ scale: 1.05, y: -10 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setScreen(gift.id)}
-                  className={`w-full p-6 rounded-2xl shadow-sm border border-white/50 flex items-center gap-4 transition-all ${gift.color}`}
+                  className={`flex flex-col items-center justify-center p-12 rounded-3xl shadow-md border border-white/50 transition-all ${gift.color}`}
                 >
-                  <div className="p-4 bg-white rounded-full shadow-sm">
+                  <div className="p-6 bg-white rounded-full shadow-md mb-6">
                     {gift.icon}
                   </div>
-                  <span className="text-xl font-semibold">{gift.label}</span>
+                  <span className="text-2xl font-bold">{gift.label}</span>
                 </motion.button>
               ))}
             </div>
@@ -265,24 +265,25 @@ function App() {
       case 'GIFT_3': // Photos
         return (
           <Container className="bg-purple-50">
-            <h2 className="text-2xl font-bold text-purple-600 mb-6 font-serif">Us Through Time</h2>
-            <div className="grid grid-cols-2 gap-4 w-full max-w-sm px-4">
+            <h2 className="text-4xl font-bold text-purple-600 mb-12 font-serif">Us Through Time</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full max-w-6xl px-4">
               {[1, 2, 3, 4].map((i) => (
                 <motion.div
                   key={i}
                   whileHover={{ scale: 1.05, rotate: Math.random() * 6 - 3, zIndex: 10 }}
-                  className="bg-white p-2 pb-8 shadow-md rounded-sm transform transition-all cursor-pointer"
+                  className="bg-white p-4 pb-12 shadow-xl rounded-sm transform transition-all cursor-pointer"
                   style={{ rotate: `${Math.random() * 6 - 3}deg` }}
                 >
-                  <div className="w-full h-24 bg-gray-200 flex items-center justify-center overflow-hidden">
-                    <span className="text-gray-400 text-xs">Photo {i}</span>
+                  <div className="w-full aspect-[4/3] bg-gray-200 flex items-center justify-center overflow-hidden mb-4">
+                    <span className="text-gray-400 text-lg">Photo {i}</span>
                   </div>
+                  <div className="h-6 w-3/4 bg-gray-100 rounded"></div>
                 </motion.div>
               ))}
             </div>
             <button
               onClick={() => setScreen('SUCCESS')}
-              className="mt-10 bg-purple-500 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-purple-600 transition-colors"
+              className="mt-16 bg-purple-500 text-white px-12 py-4 rounded-full font-bold text-xl shadow-lg hover:bg-purple-600 transition-colors"
             >
               One Last Thing...
             </button>
@@ -313,9 +314,9 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen bg-gray-900 flex items-center justify-center overflow-hidden">
-      <div className="w-full max-w-[430px] h-full sm:h-[90%] sm:max-h-[932px] bg-white shadow-2xl relative overflow-hidden text-black sm:rounded-[3rem] border-8 border-gray-800">
-        {/* Mobile Frame */}
+    <div className="w-screen h-screen bg-pink-50 flex items-center justify-center overflow-hidden">
+      <div className="w-full h-full bg-white relative overflow-hidden text-black transition-all">
+        {/* Render the full-screen content */}
         {renderContent()}
 
         {/* No Modal Overlay */}
