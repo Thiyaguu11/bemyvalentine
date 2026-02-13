@@ -6,7 +6,7 @@ import confetti from 'canvas-confetti';
 // Placeholder GIFs
 const GIFS = {
   sideEye: '/images/sideeye.jpg',
-  kiss: 'https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif',
+  kiss: '/images/6ac51b2b-49b6-4f51-b277-e21d86fc032d.webp',
   love: '/images/valentine.jpg',
 };
 
