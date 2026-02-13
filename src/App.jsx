@@ -18,6 +18,44 @@ const PROS_TEXTS = [
   "I'm pretty good at killing spiders for you.",
 ];
 
+const BackgroundHearts = () => {
+  const hearts = Array.from({ length: 20 });
+  return (
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-50">
+      {hearts.map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{
+            opacity: 0,
+            scale: Math.random() * 0.5 + 0.3,
+            x: Math.random() * 120 + "%",
+            y: Math.random() * 120 + "%"
+          }}
+          animate={{
+            opacity: [0, 0.4, 0],
+            x: ["0%", "-20%"],
+            y: ["0%", "-20%"],
+          }}
+          transition={{
+            duration: Math.random() * 15 + 15,
+            repeat: Infinity,
+            ease: "linear",
+            delay: Math.random() * 20
+          }}
+          className="absolute text-pink-200"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            filter: "blur(0.5px)"
+          }}
+        >
+          <Heart size={Math.random() * 30 + 10} fill="currentColor" />
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
 function App() {
   const [screen, setScreen] = useState('LANDING'); // LANDING, AFTER_NO, YES_PAGE, GIFT_MENU, GIFT_1, GIFT_2, GIFT_3, SUCCESS
   const [showNoModal, setShowNoModal] = useState(false);
@@ -53,8 +91,7 @@ function App() {
 
   // Reusable Container
   const Container = ({ children, className = "" }) => (
-    <div className={`w-full h-full flex flex-col items-center justify-center p-6 relative overflow-hidden transition-all live-gradient ${className}`}>
-      {/* Floating Hearts generic animation bg could go here */}
+    <div className={`w-full h-full flex flex-col items-center justify-center p-6 relative overflow-hidden transition-all bg-transparent ${className}`}>
       {children}
     </div>
   );
@@ -340,8 +377,9 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center overflow-hidden">
-      <div className="w-full h-full relative overflow-hidden text-black transition-all">
+    <div className="w-screen h-screen flex items-center justify-center overflow-hidden live-gradient">
+      <BackgroundHearts />
+      <div className="w-full h-full relative overflow-hidden text-black transition-all z-10">
         {/* Render the full-screen content */}
         {renderContent()}
 
