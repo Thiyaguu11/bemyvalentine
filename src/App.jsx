@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, Music, Mail, Camera, Play, Pause, Heart, Gift, Lock, ChevronLeft, ChevronRight } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 // Placeholder GIFs
 const GIFS = {
@@ -39,6 +40,16 @@ function App() {
   // Navigation
   const toYesPage = () => setScreen('YES_PAGE');
   const toGiftMenu = () => setScreen('GIFT_MENU');
+
+  const handleOpenLetter = () => {
+    setIsGift2Open(true);
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#ff69b4', '#ff1493', '#ffc0cb', '#ffffff']
+    });
+  };
 
   // Reusable Container
   const Container = ({ children, className = "" }) => (
@@ -86,7 +97,7 @@ function App() {
                     onClick={toYesPage}
                     className={`${isHoveringNo ? 'bg-green-500 shadow-green-200' : 'bg-red-400 shadow-red-200'} text-white px-8 py-3 rounded-full font-semibold shadow-lg transition-all duration-300`}
                   >
-                    {isHoveringNo ? 'Yessss' : 'No'}
+                    {isHoveringNo ? 'Yessss💖' : 'No'}
                   </motion.button>
                 )}
 
@@ -236,7 +247,7 @@ function App() {
                 >
                   <motion.button
                     whileHover={{ scale: 1.05, rotate: [0, -5, 5, 0] }}
-                    onClick={() => setIsGift2Open(true)}
+                    onClick={handleOpenLetter}
                     className="w-64 h-40 bg-pink-100 border-4 border-pink-300 rounded-xl shadow-xl flex items-center justify-center relative overflow-hidden group"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-pink-100 to-orange-100"></div>
